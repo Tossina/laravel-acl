@@ -55,13 +55,11 @@ class ShowPermissions extends Command
                     return;
                 }
 
-                $permissions = $group->permissions->map(function ($permission) {
-                    return [
-                        'permission'  => $permission->name,
-                        'slug'        => $permission->slug,
-                        'description' => $permission->description,
-                    ];
-                });
+                $permissions = $group->permissions->map(fn($permission) => [
+                    'permission'  => $permission->name,
+                    'slug'        => $permission->slug,
+                    'description' => $permission->description,
+                ]);
                 $this->info('Showing '.$group->name.' permissions:');
             } else {
                 $this->info('Displaying all permissions:');

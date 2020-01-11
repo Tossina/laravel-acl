@@ -11,10 +11,8 @@ class GroupDoesNotExistSolutionProvider implements HasSolutionsForThrowable
 {
     /**
      * The slug to create for the group.
-     *
-     * @var string
      */
-    private $slug;
+    private string $slug;
 
     /**
      * Can the exception be solved.

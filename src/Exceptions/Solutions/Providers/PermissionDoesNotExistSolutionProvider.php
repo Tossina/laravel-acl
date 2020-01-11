@@ -11,10 +11,8 @@ class PermissionDoesNotExistSolutionProvider implements HasSolutionsForThrowable
 {
     /**
      * The slug to create for the permission.
-     *
-     * @var string
      */
-    private $slug;
+    private string $slug;
 
     /**
      * Can the exception be solved.

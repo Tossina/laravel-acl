@@ -9,10 +9,8 @@ class AddMissingPermissionsTraitSolution implements RunnableSolution
 {
     /**
      * The class which the method is called from.
-     *
-     * @var string
      */
-    private $class;
+    private string $class;
 
     /**
      * Construct new Solution.

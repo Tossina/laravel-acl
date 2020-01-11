@@ -347,9 +347,7 @@ trait GroupsTrait
     public function assignAllPermissions()
     {
         $permissionModel = app(config('acl.models.permission'));
-        $permissionModel->all()->map(function ($permission) {
-            return $this->assignPermissions([$permission]);
-        });
+        $permissionModel->all()->map(fn($permission) => $this->assignPermissions([$permission]));
 
         return $this;
     }
@@ -362,9 +360,7 @@ trait GroupsTrait
     public function attachAllUsers()
     {
         $userModel = app(config('acl.models.user'));
-        $userModel->all()->map(function ($user) {
-            return $this->assignUser([$user]);
-        });
+        $userModel->all()->map(fn($user) => $this->assignUser([$user]));
 
         return $this;
     }

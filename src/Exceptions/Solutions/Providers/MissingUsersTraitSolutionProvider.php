@@ -13,10 +13,8 @@ class MissingUsersTraitSolutionProvider implements HasSolutionsForThrowable
 {
     /**
      * The class method is called on.
-     *
-     * @var string
      */
-    private $class;
+    private string $class;
 
     /**
      * Can the exception be solved.

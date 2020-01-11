@@ -142,9 +142,7 @@ trait UsersTrait
     public function permissionViaGroups()
     {
         return $this->load('groups', 'groups.permissions')
-            ->groups->flatMap(function ($group) {
-                return $group->permissions;
-            })->sort()->values();
+            ->groups->flatMap(fn($group) => $group->permissions)->sort()->values();
     }
 
     /**
@@ -590,9 +588,7 @@ trait UsersTrait
     {
         $permissions = $this->convertToPermissionModels($permissions);
 
-        $groupsWithPermissions = array_unique(array_reduce($permissions, function ($result, $permission) {
-            return array_merge($result, $permission->groups->all());
-        }, []));
+        $groupsWithPermissions = array_unique(array_reduce($permissions, fn($result, $permission) => array_merge($result, $permission->groups->all()), []));
 
         return $query->where(function ($query) use ($permissions, $groupsWithPermissions) {
             $query->whereHas('permissions', function ($query) use ($permissions) {
@@ -646,9 +642,7 @@ trait UsersTrait
     public function assignAllGroups()
     {
         $groupModel = app(config('acl.models.group'));
-        $groupModel->all()->map(function ($group) {
-            return $this->assignGroup([$group]);
-        });
+        $groupModel->all()->map(fn($group) => $this->assignGroup([$group]));
 
         return $this;
     }
@@ -661,9 +655,7 @@ trait UsersTrait
     public function assignAllPermissions()
     {
         $permissionModel = app(config('acl.models.permission'));
-        $permissionModel->all()->map(function ($permission) {
-            return $this->assignPermissions([$permission]);
-        });
+        $permissionModel->all()->map(fn($permission) => $this->assignPermissions([$permission]));
 
         return $this;
     }

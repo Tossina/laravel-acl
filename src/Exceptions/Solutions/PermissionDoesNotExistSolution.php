@@ -9,10 +9,8 @@ class PermissionDoesNotExistSolution implements RunnableSolution
 {
     /**
      * The slug to build the permission off of.
-     *
-     * @var string
      */
-    private $slug;
+    private ?string $slug;
 
     public function __construct(string $slug = null)
     {

@@ -30,9 +30,7 @@ class ACLAuthServiceProvider extends ServiceProvider
             if (config('acl.tables.permissions') !== null) {
                 if (Schema::hasTable(config('acl.tables.permissions'))) {
                     $permissionModel->all()->map(function ($permission) {
-                        Gate::define($permission->slug, function ($user) use ($permission) {
-                            return $user->hasPermission($permission) || $user->isAdmin();
-                        });
+                        Gate::define($permission->slug, fn($user) => $user->hasPermission($permission) || $user->isAdmin());
                     });
                 }
             }
@@ -53,92 +51,64 @@ class ACLAuthServiceProvider extends ServiceProvider
         /*
          * Group directive
          */
-        Blade::directive('group', function ($group) {
-            return "<?php if(auth()->check() && auth()->user()->hasGroup({$group})){?>";
-        });
+        Blade::directive('group', fn($group) => "<?php if(auth()->check() && auth()->user()->hasGroup({$group})){?>");
         /*
          * Else group directive
          */
-        Blade::directive('elsegroup', function ($group) {
-            return "<?php }else if(auth()->check() && auth()->user()->hasGroup({$group})){?>";
-        });
+        Blade::directive('elsegroup', fn($group) => "<?php }else if(auth()->check() && auth()->user()->hasGroup({$group})){?>");
         /*
          * End group directive
          */
-        Blade::directive('endgroup', function () {
-            return '<?php } ?>';
-        });
+        Blade::directive('endgroup', fn() => '<?php } ?>');
         /*
          * Permission directive
          */
-        Blade::directive('permission', function ($permission) {
-            return "<?php if(auth()->check() && auth()->user()->hasPermission({$permission})){?>";
-        });
+        Blade::directive('permission', fn($permission) => "<?php if(auth()->check() && auth()->user()->hasPermission({$permission})){?>");
 
         /*
          * Else permission directive
          */
-        Blade::directive('elsepermission', function ($permission) {
-            return "<?php }else if(auth()->check() && auth()->user()->hasPermission({$permission})){?>";
-        });
+        Blade::directive('elsepermission', fn($permission) => "<?php }else if(auth()->check() && auth()->user()->hasPermission({$permission})){?>");
         /*
          * End permission directive
          */
-        Blade::directive('endpermission', function () {
-            return '<?php } ?>';
-        });
+        Blade::directive('endpermission', fn() => '<?php } ?>');
 
         /*
          * All permissions directive
          */
-        Blade::directive('allpermission', function ($permissions) {
-            return "<?php if(auth()->check() && auth()->user()->hasAllPermissions({$permissions})){?>";
-        });
+        Blade::directive('allpermission', fn($permissions) => "<?php if(auth()->check() && auth()->user()->hasAllPermissions({$permissions})){?>");
         /*
          * End all permissions directive
          */
-        Blade::directive('endallpermission', function () {
-            return '<?php } ?>';
-        });
+        Blade::directive('endallpermission', fn() => '<?php } ?>');
 
         /*
          * Any permission directive
          */
-        Blade::directive('anypermission', function ($permissions) {
-            return "<?php if(auth()->check() && auth()->user()->hasAnyPermission({$permissions})){?>";
-        });
+        Blade::directive('anypermission', fn($permissions) => "<?php if(auth()->check() && auth()->user()->hasAnyPermission({$permissions})){?>");
         /*
          * End any permission directive
          */
-        Blade::directive('endanypermission', function () {
-            return '<?php } ?>';
-        });
+        Blade::directive('endanypermission', fn() => '<?php } ?>');
 
         /*
          * Any group directive
          */
-        Blade::directive('anygroup', function ($groups) {
-            return "<?php if(auth()->check() && auth()->user()->hasAnyGroup({$groups})){?>";
-        });
+        Blade::directive('anygroup', fn($groups) => "<?php if(auth()->check() && auth()->user()->hasAnyGroup({$groups})){?>");
         /*
          * End any group directive
          */
-        Blade::directive('endanygroup', function () {
-            return '<?php } ?>';
-        });
+        Blade::directive('endanygroup', fn() => '<?php } ?>');
 
         /*
          * All groups directive
          */
-        Blade::directive('allgroups', function ($groups) {
-            return "<?php if(auth()->check() && auth()->user()->hasAllGroups({$groups})){?>";
-        });
+        Blade::directive('allgroups', fn($groups) => "<?php if(auth()->check() && auth()->user()->hasAllGroups({$groups})){?>");
         /*
          * End all groups directive
          */
-        Blade::directive('endallgroups', function () {
-            return '<?php } ?>';
-        });
+        Blade::directive('endallgroups', fn() => '<?php } ?>');
     }
 
     /**

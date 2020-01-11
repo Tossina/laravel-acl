@@ -9,10 +9,8 @@ class GroupDoesNotExistSolution implements RunnableSolution
 {
     /**
      * The slug to build the group off of.
-     *
-     * @var string
      */
-    private $slug;
+    private ?string $slug;
 
     public function __construct(string $slug = null)
     {

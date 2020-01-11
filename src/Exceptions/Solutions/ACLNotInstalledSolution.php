@@ -56,9 +56,7 @@ class ACLNotInstalledSolution implements RunnableSolution
         $filesystem = new Filesystem();
         $files = $filesystem->glob(__DIR__.'/../database/migrations/*.php');
 
-        $filesExist = Collection::make($files)->filter(function ($file) use ($filesystem) {
-            return $filesystem->exists(app()->databasePath('/migrations').$file);
-        })->count();
+        $filesExist = Collection::make($files)->filter(fn($file) => $filesystem->exists(app()->databasePath('/migrations').$file))->count();
 
         return $filesExist;
     }
