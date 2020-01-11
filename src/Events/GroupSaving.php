@@ -5,12 +5,13 @@ namespace Junges\ACL\Events;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Junges\ACL\Http\Models\Group;
 
 class GroupSaving
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $group;
+    public Group $group;
 
     /**
      * Create a new event instance.

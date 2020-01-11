@@ -11,16 +11,14 @@ class ShowPermissions extends Command
     /**
      * The name and signature of the console command.
      *
-     * @var string
      */
-    protected $signature = 'permission:show {--group=}';
+    protected string $signature = 'permission:show {--group=}';
 
     /**
      * The console command description.
      *
-     * @var string
      */
-    protected $description = 'Show all database permissions or the permissions for a specific group';
+    protected string $description = 'Show all database permissions or the permissions for a specific group';
 
     /**
      * Create a new command instance.

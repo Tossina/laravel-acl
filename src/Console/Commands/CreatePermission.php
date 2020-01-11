@@ -10,16 +10,14 @@ class CreatePermission extends Command
     /**
      * The name and signature of the console command.
      *
-     * @var string
      */
-    protected $signature = 'permission:create {name} {slug} {description}';
+    protected string $signature = 'permission:create {name} {slug} {description}';
 
     /**
      * The console command description.
      *
-     * @var string
      */
-    protected $description = 'Create a new system permission on permissions table';
+    protected string $description = 'Create a new system permission on permissions table';
 
     /**
      * Create a new command instance.

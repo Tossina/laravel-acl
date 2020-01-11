@@ -12,14 +12,14 @@ class CreateGroup extends Command
      *
      * @var string
      */
-    protected $signature = 'group:create {name} {slug} {description}';
+    protected string $signature = 'group:create {name} {slug} {description}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new group on groups table';
+    protected string $description = 'Create a new group on groups table';
 
     /**
      * Create a new command instance.

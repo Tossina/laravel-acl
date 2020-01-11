@@ -3,9 +3,11 @@
 namespace Junges\ACL\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 use Junges\ACL\Exceptions\GroupDoesNotExistException;
 use Junges\ACL\Exceptions\PermissionDoesNotExistException;
+use phpDocumentor\Reflection\Types\Boolean;
 
 trait UsersTrait
 {
@@ -14,7 +16,7 @@ trait UsersTrait
      *
      * @return mixed
      */
-    public function groups()
+    public function groups() : BelongsToMany
     {
         return $this->belongsToMany(config('acl.models.group'), config('acl.tables.user_has_groups'));
     }
@@ -24,7 +26,7 @@ trait UsersTrait
      *
      * @return mixed
      */
-    public function permissions()
+    public function permissions() : BelongsToMany
     {
         return $this->belongsToMany(config('acl.models.permission'), config('acl.tables.user_has_permissions'));
     }
@@ -34,7 +36,7 @@ trait UsersTrait
      * @param mixed $group
      * @return bool
      */
-    public function hasGroup($group)
+    public function hasGroup($group) : bool
     {
         $model = app(config('acl.models.group'));
         $where = null;
@@ -59,7 +61,7 @@ trait UsersTrait
      * @param $permission
      * @return bool
      */
-    public function hasPermission($permission)
+    public function hasPermission($permission) : bool
     {
         $model = app(config('acl.models.permission'));
         $where = null;
@@ -85,7 +87,7 @@ trait UsersTrait
      * @param $permission
      * @return bool
      */
-    public function hasDirectPermission($permission)
+    public function hasDirectPermission($permission) : bool
     {
         $model = app(config('acl.models.permission'));
         $where = null;
@@ -110,7 +112,7 @@ trait UsersTrait
      * @param $permission
      * @return bool
      */
-    public function hasPermissionThroughGroup($permission)
+    public function hasPermissionThroughGroup($permission) : bool
     {
         $model = app(config('acl.models.permission'));
         $where = null;
@@ -139,7 +141,7 @@ trait UsersTrait
      *
      * @return mixed
      */
-    public function permissionViaGroups()
+    public function permissionViaGroups() : Collection
     {
         return $this->load('groups', 'groups.permissions')
             ->groups->flatMap(fn($group) => $group->permissions)->sort()->values();
@@ -148,7 +150,7 @@ trait UsersTrait
     /**
      * Return all the permissions a user has, both directly and via groups.
      */
-    public function getAllPermissions()
+    public function getAllPermissions() : Collection
     {
         $permissions = $this->permissions;
         if ($this->groups) {
@@ -163,7 +165,7 @@ trait UsersTrait
      *
      * @return mixed
      */
-    protected function getPermissionIds(array $permissions)
+    protected function getPermissionIds(array $permissions) : Collection
     {
         $model = app(config('acl.models.permission'));
 
@@ -188,7 +190,7 @@ trait UsersTrait
      *
      * @return mixed
      */
-    protected function getGroupIds(array $groups)
+    protected function getGroupIds(array $groups) : Collection
     {
         $model = app(config('acl.models.group'));
 

@@ -5,12 +5,13 @@ namespace Junges\ACL\Events;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Junges\ACL\Http\Models\Permission;
 
 class PermissionSaving
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $permission;
+    public Permission $permission;
 
     /**
      * Create a new event instance.

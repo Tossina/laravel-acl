@@ -11,16 +11,14 @@ class UserPermissions extends Command
     /**
      * The name and signature of the console command.
      *
-     * @var string
      */
-    protected $signature = 'user:permissions {user}';
+    protected string $signature = 'user:permissions {user}';
 
     /**
      * The console command description.
      *
-     * @var string
      */
-    protected $description = 'Show user permissions';
+    protected string $description = 'Show user permissions';
 
     /**
      * Create a new command instance.
